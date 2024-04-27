@@ -26,7 +26,6 @@ for each_account in AWS_ACCOUNTS:
         filter = [{'Name': 'tag:Name', 'Values': ['*']}]
         vpc_response = client_obj.describe_vpcs(Filters=filter)['Vpcs']
         for each_vpc in vpc_response:
-            # VPC_ids = []
             VPC_ids.append(each_vpc['VpcId'])
             VPC_cidrs.append(each_vpc['CidrBlock'])
 
