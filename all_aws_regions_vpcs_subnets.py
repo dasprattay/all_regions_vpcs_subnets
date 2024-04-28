@@ -31,9 +31,9 @@ for each_account in AWS_ACCOUNTS:
 
     # print(VPC_ids)
     # print(VPC_cidrs)
-
+    
+    v = 0
     for vpc_id in VPC_ids:
-        v = 0
         subnet_response = client_obj.describe_subnets(
             Filters=[{'Name': 'vpc-id', 'Values': [vpc_id]}])
         vpc_cidr = VPC_cidrs[v]
@@ -59,11 +59,13 @@ for each_account in AWS_ACCOUNTS:
             list_of_all_subnet_AZs.append(each_subnet['AvailabilityZone'])
             vpc_record.append(aws_account + list_of_all_Regions + list_of_all_VPC_ids + list_of_all_VPC_cidrs +
                               list_of_all_subnet_ids + list_of_all_subnet_cidrs + count_of_available_ips + list_of_all_subnet_AZs)
-            v = v+1
+        v = v+1
+        
 # print(list_of_all_VPC_ids)
 # print(list_of_all_VPC_cidrs)
 # print(list_of_all_Regions)
 # print(vpc_record)
+
 headers = ["AWS Account #"]+["AWS Region"]+["VPC-ID"] + \
     ["VPC-CIDR"]+["SUBNET-ID"]+["SUBNET-CIDR"] + \
     ["AVAILABLE IPs"]+["Availability Zone"]
